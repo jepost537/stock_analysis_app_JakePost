@@ -305,6 +305,8 @@ with tab1:
     )
 
     # ── 1c. Cumulative wealth index ───────────────────────────────────────────
+    with st.expander("View Daily Returns Data"):
+        st.dataframe(returns[user_tickers].style.format("{:.4%}"), use_container_width=True)
     st.subheader("Cumulative Wealth Index — $10,000 Invested")
 
     wealth    = (1 + returns[user_tickers]).cumprod() * 10_000
@@ -684,11 +686,12 @@ with tab3:
 
         # Full volatility curve across all weight combinations (0% → 100%)
         weights_range = np.linspace(0, 1, 101)
-        curve_vols = np.sqrt(
+        curve_vols = np.sqrt(np.maximum(
             weights_range**2       * ann_vol_a**2
             + (1 - weights_range)**2 * ann_vol_b**2
-            + 2 * weights_range * (1 - weights_range) * ann_cov
-        )
+            + 2 * weights_range * (1 - weights_range) * ann_cov,
+            0
+        ))
 
         fig_pe = go.Figure()
 
