@@ -1,6 +1,5 @@
 """
 Stock Comparison & Analysis Application
-FDA1 Project — built from course notebook conventions (Weeks 8–11)
 """
 
 import streamlit as st
