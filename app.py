@@ -1,5 +1,6 @@
 """
 Stock Comparison & Analysis Application
+
 """
 
 import streamlit as st
